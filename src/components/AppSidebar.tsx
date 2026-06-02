@@ -12,6 +12,8 @@ import instagramLogo from "@/assets/partners/instagram.png";
 import twitterLogo from "@/assets/partners/twitter.jpg";
 import tiktokLogo from "@/assets/partners/tiktok.webp";
 import kwaiLogo from "@/assets/partners/kwai.png";
+import batepapoLogo from "@/assets/partners/batepapo-logo.png.asset.json";
+import batepapoGif from "@/assets/partners/batepapo.gif.asset.json";
 
 const menuItems = [
   { icon: Home, label: "Início", path: "/" },
@@ -124,6 +126,30 @@ export default function AppSidebar() {
       {/* Bottom */}
       {!collapsed && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 border-t border-border/30 space-y-3">
+          {/* Bate Papo promo */}
+          <motion.a
+            href="https://batepapogratis.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-blue-500/10 via-background to-orange-500/10 border border-border/40 hover:border-primary/50 shadow-button hover:shadow-glow transition-premium overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-blue-500/5 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-premium" />
+            <img
+              src={batepapoLogo.url}
+              alt="Bate Papo"
+              className="relative w-24 h-24 object-contain drop-shadow-lg group-hover:scale-105 transition-premium"
+            />
+            <img
+              src={batepapoGif.url}
+              alt="Bate Papo chat"
+              className="relative w-12 h-12 object-contain"
+            />
+          </motion.a>
+
+          <div className="h-px bg-border/30" />
+
           <div className="glass-card rounded-xl p-3">
             <div className="flex items-center gap-2 mb-2">
               <Download className="w-4 h-4 text-green-500" />
