@@ -136,12 +136,12 @@ export default function AppSidebar() {
               <img
                 src={batepapoLogo.url}
                 alt="Bate Papo"
-                className="w-36 h-36 object-contain drop-shadow-md group-hover:scale-[1.03] transition-premium -mb-4"
+                className="w-36 h-36 object-contain drop-shadow-md transition-premium group-hover:scale-[1.03] group-hover:brightness-110 group-hover:drop-shadow-[0_0_16px_rgba(59,130,246,0.6)] -mb-1"
               />
               <img
                 src={batepapoGif.url}
                 alt="Bate Papo chat"
-                className="w-14 h-14 object-contain"
+                className="w-16 h-16 object-contain transition-premium group-hover:scale-105 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(249,115,22,0.6)]"
               />
             </motion.a>
           </div>
