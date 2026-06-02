@@ -167,6 +167,3 @@ export default function AppSidebar() {
     </motion.aside>
   );
 }
-    </motion.aside>
-  );
-}
