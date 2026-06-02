@@ -69,8 +69,8 @@ export default function AppSidebar() {
         </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 py-3 px-3 space-y-1 overflow-y-auto">
+      {/* Unified scroll area (discrete, no visible scrollbar) */}
+      <nav className="flex-1 py-3 px-3 space-y-1 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -121,48 +121,49 @@ export default function AppSidebar() {
             </motion.a>
           ))}
         </div>
-      </nav>
 
-      {/* Bottom */}
-      {!collapsed && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 border-t border-border/30 space-y-3">
-          {/* Bate Papo promo */}
-          <motion.a
-            href="https://batepapogratis.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-blue-500/10 via-background to-orange-500/10 border border-border/40 hover:border-primary/50 shadow-button hover:shadow-glow transition-premium overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/0 via-blue-500/5 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-premium" />
-            <img
-              src={batepapoLogo.url}
-              alt="Bate Papo"
-              className="relative w-24 h-24 object-contain drop-shadow-lg group-hover:scale-105 transition-premium"
-            />
-            <img
-              src={batepapoGif.url}
-              alt="Bate Papo chat"
-              className="relative w-12 h-12 object-contain"
-            />
-          </motion.a>
-
-          <div className="h-px bg-border/30" />
-
-          <div className="glass-card rounded-xl p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <Download className="w-4 h-4 text-green-500" />
-              <span className="text-xs font-semibold text-foreground">100% Grátis</span>
-            </div>
-            <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
-              <div className="h-full bg-green-500 rounded-full" style={{ width: "100%" }} />
-            </div>
-            <p className="text-[11px] text-muted-foreground mt-1.5">Download Ilimitado</p>
+        {/* Bate Papo promo */}
+        {!collapsed && (
+          <div className="pt-4 mt-4 border-t border-border/30">
+            <motion.a
+              href="https://batepapogratis.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex flex-col items-center px-2 py-2 rounded-xl transition-premium"
+            >
+              <img
+                src={batepapoLogo.url}
+                alt="Bate Papo"
+                className="w-36 h-36 object-contain drop-shadow-md group-hover:scale-[1.03] transition-premium -mb-4"
+              />
+              <img
+                src={batepapoGif.url}
+                alt="Bate Papo chat"
+                className="w-14 h-14 object-contain"
+              />
+            </motion.a>
           </div>
-          <p className="text-[10px] text-muted-foreground text-center">v2.0.1 Grátis</p>
-        </motion.div>
-      )}
+        )}
+
+        {/* 100% Grátis */}
+        {!collapsed && (
+          <div className="pt-4 mt-4 border-t border-border/30 space-y-3">
+            <div className="glass-card rounded-xl p-3">
+              <div className="flex items-center gap-2 mb-2">
+                <Download className="w-4 h-4 text-green-500" />
+                <span className="text-xs font-semibold text-foreground">100% Grátis</span>
+              </div>
+              <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
+                <div className="h-full bg-green-500 rounded-full" style={{ width: "100%" }} />
+              </div>
+              <p className="text-[11px] text-muted-foreground mt-1.5">Download Ilimitado</p>
+            </div>
+            <p className="text-[10px] text-muted-foreground text-center">v2.0.1 Grátis</p>
+          </div>
+        )}
+      </nav>
     </motion.aside>
   );
 }
