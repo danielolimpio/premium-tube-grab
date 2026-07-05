@@ -83,14 +83,6 @@ export default function SEOHead({ title, description, canonical, noindex, breadc
         name: SITE_NAME,
         url: SITE_URL,
         description: "Baixe vídeos do YouTube em 4K, 8K, MP3 e muito mais. Plataforma premium, rápida e segura.",
-        potentialAction: {
-          "@type": "SearchAction",
-          target: {
-            "@type": "EntryPoint",
-            urlTemplate: `${SITE_URL}/?q={search_term_string}`,
-          },
-          "query-input": "required name=search_term_string",
-        },
       });
     }
 
