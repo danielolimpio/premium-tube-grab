@@ -1,13 +1,21 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+interface HowToStep {
+  name: string;
+  text: string;
+}
+
 interface SEOHeadProps {
   title: string;
   description: string;
   canonical?: string;
   noindex?: boolean;
+  keywords?: string;
   breadcrumbs?: { name: string; url: string }[];
   faqItems?: { question: string; answer: string }[];
+  howToSteps?: HowToStep[];
+  howToName?: string;
 }
 
 const SITE_URL = "https://baixarvideoyoutube.com";
@@ -34,6 +42,18 @@ function setCanonical(href: string) {
   el.setAttribute("href", href);
 }
 
+function setLinkAlt(hreflang: string, href: string) {
+  const selector = `link[rel="alternate"][hreflang="${hreflang}"]`;
+  let el = document.querySelector(selector) as HTMLLinkElement | null;
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", "alternate");
+    el.setAttribute("hreflang", hreflang);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", href);
+}
+
 function setJsonLd(id: string, data: object) {
   let el = document.getElementById(id) as HTMLScriptElement | null;
   if (!el) {
@@ -45,17 +65,38 @@ function setJsonLd(id: string, data: object) {
   el.textContent = JSON.stringify(data);
 }
 
-export default function SEOHead({ title, description, canonical, noindex, breadcrumbs, faqItems }: SEOHeadProps) {
+export default function SEOHead({
+  title,
+  description,
+  canonical,
+  noindex,
+  keywords,
+  breadcrumbs,
+  faqItems,
+  howToSteps,
+  howToName,
+}: SEOHeadProps) {
   const { pathname } = useLocation();
   const fullUrl = canonical || `${SITE_URL}${pathname}`;
 
   useEffect(() => {
-    // Title
     document.title = title;
 
-    // Meta tags
     setMeta("description", description);
-    setMeta("robots", noindex ? "noindex, nofollow" : "index, follow");
+    // Enhanced robots directive: allow large image/snippet/video previews for rich results
+    setMeta(
+      "robots",
+      noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    );
+    setMeta(
+      "googlebot",
+      noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    );
+    if (keywords) setMeta("keywords", keywords);
 
     // Open Graph
     setMeta("og:title", title, "property");
@@ -63,6 +104,9 @@ export default function SEOHead({ title, description, canonical, noindex, breadc
     setMeta("og:type", "website", "property");
     setMeta("og:url", fullUrl, "property");
     setMeta("og:image", OG_IMAGE, "property");
+    setMeta("og:image:width", "1200", "property");
+    setMeta("og:image:height", "630", "property");
+    setMeta("og:image:alt", `${SITE_NAME} — Download em 4K, 8K, MP3`, "property");
     setMeta("og:site_name", SITE_NAME, "property");
     setMeta("og:locale", "pt_BR", "property");
 
@@ -71,9 +115,12 @@ export default function SEOHead({ title, description, canonical, noindex, breadc
     setMeta("twitter:title", title);
     setMeta("twitter:description", description);
     setMeta("twitter:image", OG_IMAGE);
+    setMeta("twitter:image:alt", `${SITE_NAME} — Download em 4K, 8K, MP3`);
 
-    // Canonical
+    // Canonical + hreflang (pt-BR site)
     setCanonical(fullUrl);
+    setLinkAlt("pt-BR", fullUrl);
+    setLinkAlt("x-default", fullUrl);
 
     // JSON-LD: WebSite (only on homepage)
     if (pathname === "/") {
@@ -82,7 +129,18 @@ export default function SEOHead({ title, description, canonical, noindex, breadc
         "@type": "WebSite",
         name: SITE_NAME,
         url: SITE_URL,
-        description: "Baixe vídeos do YouTube em 4K, 8K, MP3 e muito mais. Plataforma premium, rápida e segura.",
+        inLanguage: "pt-BR",
+        description:
+          "Baixe vídeos do YouTube em 4K, 8K, MP3 e muito mais. Plataforma premium, rápida e segura.",
+      });
+
+      // Organization schema (only on homepage — sitewide entity)
+      setJsonLd("ld-org", {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+        logo: `${SITE_URL}/favicon.png`,
       });
     }
 
@@ -92,6 +150,7 @@ export default function SEOHead({ title, description, canonical, noindex, breadc
       "@type": "WebApplication",
       name: SITE_NAME,
       url: SITE_URL,
+      inLanguage: "pt-BR",
       applicationCategory: "MultimediaApplication",
       operatingSystem: "Any",
       browserRequirements: "Requires JavaScript. Requires HTML5.",
@@ -140,13 +199,33 @@ export default function SEOHead({ title, description, canonical, noindex, breadc
       });
     }
 
+    // JSON-LD: HowTo (rich result for "como baixar" queries)
+    if (howToSteps && howToSteps.length > 0) {
+      setJsonLd("ld-howto", {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: howToName || title,
+        description,
+        inLanguage: "pt-BR",
+        totalTime: "PT1M",
+        supply: [{ "@type": "HowToSupply", name: "Link do vídeo do YouTube" }],
+        tool: [{ "@type": "HowToTool", name: "Navegador web (Chrome, Safari, Firefox, Edge)" }],
+        step: howToSteps.map((s, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: s.name,
+          text: s.text,
+          url: `${fullUrl}#step-${i + 1}`,
+        })),
+      });
+    }
+
     return () => {
-      // Cleanup non-persistent JSON-LD
-      ["ld-breadcrumb", "ld-faq"].forEach((id) => {
+      ["ld-breadcrumb", "ld-faq", "ld-howto"].forEach((id) => {
         document.getElementById(id)?.remove();
       });
     };
-  }, [title, description, fullUrl, pathname, noindex, breadcrumbs, faqItems]);
+  }, [title, description, fullUrl, pathname, noindex, keywords, breadcrumbs, faqItems, howToSteps, howToName]);
 
   return null;
 }

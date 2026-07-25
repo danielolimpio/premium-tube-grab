@@ -22,6 +22,13 @@ const homeFaq = [
   { question: "Posso baixar vídeos em 4K e 8K?", answer: "Sim! Se o vídeo original estiver disponível em 4K (2160p) ou 8K (4320p), essas opções aparecerão na lista de formatos para download." },
 ];
 
+const homeHowTo = [
+  { name: "Copie o link do YouTube", text: "Abra o YouTube, acesse o vídeo desejado e copie o link completo da barra de endereço ou toque em 'Compartilhar' e depois em 'Copiar link'." },
+  { name: "Cole o link no campo de busca", text: "Volte ao Baixar Vídeo YouTube e cole o link do vídeo, Short ou playlist no campo principal da página inicial." },
+  { name: "Escolha o formato e a qualidade", text: "Selecione entre MP4 (720p, 1080p Full HD, 4K, 8K) para vídeo ou MP3/M4A (até 320 kbps) para áudio, conforme sua necessidade." },
+  { name: "Clique em Baixar e salve o arquivo", text: "Clique no botão de download da qualidade escolhida. O arquivo será salvo diretamente no seu dispositivo, sem cadastro e sem limite de downloads." },
+];
+
 const Index = () => {
   const [videoResult, setVideoResult] = useState<VideoResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,9 +39,12 @@ const Index = () => {
     <div className="flex min-h-screen bg-background">
       <SEOHead
         title="Baixar Vídeo YouTube - Download 4K/8K Grátis | MP4, MP3"
-        description="Baixe vídeos do YouTube em 4K, 8K, MP3 e muito mais. Plataforma premium, rápida e segura para download de vídeos, Shorts e áudio. 100% grátis."
+        description="Baixe vídeos do YouTube em 4K, 8K, 1080p Full HD, MP3 e MP4. Plataforma premium, rápida e segura para download de vídeos, Shorts, playlists e áudio. 100% grátis, sem cadastro."
+        keywords="baixar video youtube, baixar video youtube 4k, baixar video youtube 8k, baixar video youtube 1080p, download youtube mp4, youtube mp3, baixar musica youtube, baixar shorts, baixar playlist youtube"
         breadcrumbs={[{ name: "Início", url: "https://baixarvideoyoutube.com/" }]}
         faqItems={homeFaq}
+        howToSteps={homeHowTo}
+        howToName="Como baixar vídeos do YouTube em 4K, 8K e MP3"
       />
       <AppSidebar />
       <div className="flex-1 flex flex-col min-w-0">
