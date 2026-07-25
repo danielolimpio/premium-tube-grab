@@ -12,8 +12,8 @@ import instagramLogo from "@/assets/partners/instagram.png";
 import twitterLogo from "@/assets/partners/twitter.jpg";
 import tiktokLogo from "@/assets/partners/tiktok.webp";
 import kwaiLogo from "@/assets/partners/kwai.png";
-import batepapoLogo from "@/assets/partners/batepapo-logo.png.asset.json";
-import batepapoGif from "@/assets/partners/batepapo.gif.asset.json";
+import batepapoLogo from "@/assets/partners/batepapo-logo.png";
+import batepapoGif from "@/assets/partners/batepapo.gif";
 
 const menuItems = [
   { icon: Home, label: "Início", path: "/" },
@@ -134,12 +134,12 @@ export default function AppSidebar() {
               className="group flex flex-col items-center px-2 py-2 rounded-xl transition-premium"
             >
               <img
-                src={batepapoLogo.url}
+                src={batepapoLogo}
                 alt="Bate Papo"
                 className="w-36 h-36 object-contain drop-shadow-md transition-premium group-hover:scale-[1.02] group-hover:brightness-[1.06] group-hover:drop-shadow-[0_4px_20px_rgba(59,130,246,0.15)] -mb-1"
               />
               <img
-                src={batepapoGif.url}
+                src={batepapoGif}
                 alt="Bate Papo chat"
                 className="w-16 h-16 object-contain transition-premium group-hover:scale-[1.03] group-hover:brightness-[1.06] group-hover:drop-shadow-[0_4px_16px_rgba(249,115,22,0.15)]"
               />
