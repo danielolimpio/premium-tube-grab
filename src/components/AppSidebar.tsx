@@ -12,8 +12,8 @@ import instagramLogo from "@/assets/partners/instagram.png";
 import twitterLogo from "@/assets/partners/twitter.jpg";
 import tiktokLogo from "@/assets/partners/tiktok.webp";
 import kwaiLogo from "@/assets/partners/kwai.png";
-import batepapoLogo from "@/assets/partners/batepapo-logo.png.asset.json";
-import batepapoGif from "@/assets/partners/batepapo.gif.asset.json";
+import batepapoLogo from "@/assets/partners/batepapo-logo.png";
+import batepapoGif from "@/assets/partners/batepapo.gif";
 
 const menuItems = [
   { icon: Home, label: "Início", path: "/" },
