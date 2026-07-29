@@ -102,6 +102,36 @@ const ROUTES = [
     description:
       "Política DMCA e informações sobre remoção de conteúdo por violação de direitos autorais. Envie sua notificação DMCA através deste canal.",
   },
+  {
+    path: "/baixar-videos-instagram",
+    title: "Baixar Vídeos do Instagram Grátis - Reels, Stories e IGTV",
+    description:
+      "Baixe vídeos, Reels, Stories e IGTV do Instagram em alta qualidade e sem marca d'água. 100% grátis, rápido e sem cadastro.",
+  },
+  {
+    path: "/baixar-videos-tiktok",
+    title: "Baixar Vídeos do TikTok Sem Marca D'água - Grátis e Rápido",
+    description:
+      "Baixe vídeos do TikTok sem marca d'água em HD. Rápido, gratuito, sem cadastro e sem instalar apps. Salve TikToks favoritos em segundos.",
+  },
+  {
+    path: "/baixar-videos-facebook",
+    title: "Baixar Vídeos do Facebook em HD e Full HD - Grátis",
+    description:
+      "Baixe vídeos do Facebook em HD, Full HD e SD gratuitamente. Reels do Facebook, vídeos de páginas e grupos públicos. Sem cadastro.",
+  },
+  {
+    path: "/baixar-videos-twitter",
+    title: "Baixar Vídeos do Twitter (X) em HD - Grátis e Rápido",
+    description:
+      "Baixe vídeos e GIFs do Twitter (X) em alta qualidade. Ferramenta gratuita, sem cadastro, compatível com celular e PC.",
+  },
+  {
+    path: "/baixar-videos-kwai",
+    title: "Baixar Vídeos do Kwai Sem Marca D'água - Grátis",
+    description:
+      "Baixe vídeos do Kwai sem marca d'água em HD. Rápido, gratuito e sem cadastro. Compatível com Android, iPhone e PC.",
+  },
 ];
 
 function escapeHtml(str) {
