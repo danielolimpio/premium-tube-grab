@@ -21,6 +21,11 @@ import Contato from "./pages/Contato.tsx";
 import Sobre from "./pages/Sobre.tsx";
 import FAQ from "./pages/FAQ.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import BaixarVideosInstagram from "./pages/partners/BaixarVideosInstagram.tsx";
+import BaixarVideosTiktok from "./pages/partners/BaixarVideosTiktok.tsx";
+import BaixarVideosFacebook from "./pages/partners/BaixarVideosFacebook.tsx";
+import BaixarVideosTwitter from "./pages/partners/BaixarVideosTwitter.tsx";
+import BaixarVideosKwai from "./pages/partners/BaixarVideosKwai.tsx";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +53,11 @@ const App = () => (
             <Route path="/contato" element={<Contato />} />
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/baixar-videos-instagram" element={<BaixarVideosInstagram />} />
+            <Route path="/baixar-videos-tiktok" element={<BaixarVideosTiktok />} />
+            <Route path="/baixar-videos-facebook" element={<BaixarVideosFacebook />} />
+            <Route path="/baixar-videos-twitter" element={<BaixarVideosTwitter />} />
+            <Route path="/baixar-videos-kwai" element={<BaixarVideosKwai />} />
             {/* Legacy URL redirects (fix Google Search Console 404s) */}
             <Route path="/Principal" element={<Navigate to="/" replace />} />
             <Route path="/principal" element={<Navigate to="/" replace />} />
