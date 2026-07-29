@@ -3,15 +3,11 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home, Video, Smartphone, Music, FolderOpen, Users,
-  Download, Settings, Play, ChevronLeft, ChevronRight,
-  Sparkles, History, HelpCircle
+  Download, ChevronLeft, ChevronRight,
+  History, HelpCircle,
+  Facebook, Instagram, Twitter, Music2, Video as VideoIcon
 } from "lucide-react";
 import logo from "@/assets/logo.png";
-import facebookLogo from "@/assets/partners/facebook.png";
-import instagramLogo from "@/assets/partners/instagram.png";
-import twitterLogo from "@/assets/partners/twitter.jpg";
-import tiktokLogo from "@/assets/partners/tiktok.webp";
-import kwaiLogo from "@/assets/partners/kwai.png";
 import batepapoLogo from "@/assets/partners/batepapo-logo.png";
 import batepapoGif from "@/assets/partners/batepapo.gif";
 
@@ -27,11 +23,11 @@ const menuItems = [
 ];
 
 const partnerItems = [
-  { logo: facebookLogo, label: "Baixar Facebook", url: "https://baixarvideosfacebook.com" },
-  { logo: instagramLogo, label: "Baixar Instagram", url: "https://baixarvideosinstagram.com" },
-  { logo: twitterLogo, label: "Baixar Twitter (X)", url: "https://baixarvideostwitter.com" },
-  { logo: tiktokLogo, label: "Baixar TikTok", url: "https://baixarvideostiktok.com" },
-  { logo: kwaiLogo, label: "Baixar Kwai", url: "https://baixarvideoskwai.com" },
+  { icon: Facebook, label: "Baixar Facebook", path: "/baixar-videos-facebook", gradient: "from-blue-600 to-blue-500" },
+  { icon: Instagram, label: "Baixar Instagram", path: "/baixar-videos-instagram", gradient: "from-purple-600 via-pink-500 to-orange-400" },
+  { icon: Twitter, label: "Baixar Twitter (X)", path: "/baixar-videos-twitter", gradient: "from-slate-900 to-slate-700" },
+  { icon: Music2, label: "Baixar TikTok", path: "/baixar-videos-tiktok", gradient: "from-slate-900 via-pink-500 to-cyan-400" },
+  { icon: VideoIcon, label: "Baixar Kwai", path: "/baixar-videos-kwai", gradient: "from-orange-500 to-yellow-400" },
 ];
 
 export default function AppSidebar() {
@@ -104,22 +100,29 @@ export default function AppSidebar() {
               Outros Baixadores
             </p>
           )}
-          {partnerItems.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ x: collapsed ? 0 : 4 }}
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-premium text-muted-foreground hover:text-foreground hover:bg-secondary/80"
-              title={item.label}
-            >
-              <img src={item.logo} alt={item.label} className="w-6 h-6 rounded-md object-cover flex-shrink-0" />
-              {!collapsed && (
-                <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
-              )}
-            </motion.a>
-          ))}
+          {partnerItems.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <motion.button
+                key={item.label}
+                onClick={() => navigate(item.path)}
+                whileHover={{ x: collapsed ? 0 : 4 }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-premium group ${
+                  isActive
+                    ? "bg-secondary text-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                }`}
+                title={item.label}
+              >
+                <span className={`flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br ${item.gradient} shadow-sm flex-shrink-0`}>
+                  <item.icon className="w-4 h-4 text-white" strokeWidth={2.2} />
+                </span>
+                {!collapsed && (
+                  <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
+                )}
+              </motion.button>
+            );
+          })}
         </div>
 
         {/* Bate Papo promo */}

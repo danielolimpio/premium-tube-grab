@@ -1,18 +1,13 @@
 import { Link } from "react-router-dom";
-import { Play, Shield, FileText, Cookie, Scale, Mail, Info, BookOpen, HelpCircle } from "lucide-react";
+import { Shield, FileText, Cookie, Scale, Mail, Info, BookOpen, HelpCircle, Facebook, Instagram, Twitter, Music2, Video as VideoIcon } from "lucide-react";
 import logo from "@/assets/logo.png";
-import facebookLogo from "@/assets/partners/facebook.png";
-import instagramLogo from "@/assets/partners/instagram.png";
-import twitterLogo from "@/assets/partners/twitter.jpg";
-import tiktokLogo from "@/assets/partners/tiktok.webp";
-import kwaiLogo from "@/assets/partners/kwai.png";
 
 const partnerLinks = [
-  { logo: facebookLogo, label: "Baixar Facebook", url: "https://baixarvideosfacebook.com" },
-  { logo: instagramLogo, label: "Baixar Instagram", url: "https://baixarvideosinstagram.com" },
-  { logo: twitterLogo, label: "Baixar Twitter (X)", url: "https://baixarvideostwitter.com" },
-  { logo: tiktokLogo, label: "Baixar TikTok", url: "https://baixarvideostiktok.com" },
-  { logo: kwaiLogo, label: "Baixar Kwai", url: "https://baixarvideoskwai.com" },
+  { icon: Facebook, label: "Baixar Facebook", path: "/baixar-videos-facebook", gradient: "from-blue-600 to-blue-500" },
+  { icon: Instagram, label: "Baixar Instagram", path: "/baixar-videos-instagram", gradient: "from-purple-600 via-pink-500 to-orange-400" },
+  { icon: Twitter, label: "Baixar Twitter (X)", path: "/baixar-videos-twitter", gradient: "from-slate-900 to-slate-700" },
+  { icon: Music2, label: "Baixar TikTok", path: "/baixar-videos-tiktok", gradient: "from-slate-900 via-pink-500 to-cyan-400" },
+  { icon: VideoIcon, label: "Baixar Kwai", path: "/baixar-videos-kwai", gradient: "from-orange-500 to-yellow-400" },
 ];
 
 const legalLinks = [
@@ -107,18 +102,18 @@ export default function AppFooter() {
           <h4 className="text-sm font-semibold text-foreground mb-4 text-center">Outros Baixadores</h4>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {partnerLinks.map((p) => (
-              <a
+              <Link
                 key={p.label}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={p.path}
                 className="group flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-card/60 border border-border/40 hover:border-primary/50 hover:bg-card transition-premium shadow-sm"
               >
-                <img src={p.logo} alt={p.label} className="w-7 h-7 rounded-lg object-cover" />
+                <span className={`flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br ${p.gradient} shadow-sm`}>
+                  <p.icon className="w-4 h-4 text-white" strokeWidth={2.2} />
+                </span>
                 <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground whitespace-nowrap">
                   {p.label}
                 </span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
