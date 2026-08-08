@@ -10,9 +10,11 @@ import FeaturesGrid from "@/components/FeaturesGrid";
 import VideoResults from "@/components/VideoResults";
 import SEOHead from "@/components/SEOHead";
 import { type VideoResult } from "@/lib/youtube";
-import heroVideos from "@/assets/hero-videos.jpg";
-import heroDownload from "@/assets/hero-download.jpg";
-import ytIcon from "@/assets/yt-icon.png";
+import heroVideos from "@/assets/premium-quality.jpg";
+import heroDownload from "@/assets/premium-download.jpg";
+import heroAudio from "@/assets/premium-audio.jpg";
+import ytIcon from "@/assets/premium-hero-play.jpg";
+
 
 const homeFaq = [
   { question: "Como baixar vídeos do YouTube grátis?", answer: "Basta copiar o link do vídeo do YouTube, colar na barra de pesquisa do nosso site e clicar em 'Baixar Vídeo'. Em segundos, você verá as opções de qualidade disponíveis para download. Todo o processo é 100% gratuito e sem necessidade de cadastro." },
@@ -59,97 +61,119 @@ const Index = () => {
 
           {!videoResult && (
             <>
-              {/* Banner section */}
-              <section className="py-12 px-4">
-                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="relative rounded-2xl overflow-hidden shadow-2xl group"
-                  >
-                    <img src={heroVideos} alt="Download de vídeos" className="w-full h-56 object-cover group-hover:scale-105 transition-premium" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-lg font-bold text-foreground">Download Rápido</h3>
-                      <p className="text-xs text-muted-foreground">Baixe vídeos em segundos com qualidade premium</p>
-                    </div>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="relative rounded-2xl overflow-hidden shadow-2xl group"
-                  >
-                    <img src={heroDownload} alt="YouTube Download" className="w-full h-56 object-cover group-hover:scale-105 transition-premium" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-lg font-bold text-foreground">Qualidade 4K/8K</h3>
-                      <p className="text-xs text-muted-foreground">Resolução máxima sem compressão</p>
-                    </div>
-                  </motion.div>
+              {/* Cinematic showcase */}
+              <section className="relative py-20 px-4 overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none bg-cinematic opacity-70" />
+                <div className="relative max-w-6xl mx-auto">
+                  <div className="text-center mb-12">
+                    <span className="eyebrow text-primary">Experiência Premium</span>
+                    <h2 className="mt-4 text-3xl md:text-4xl font-extrabold gradient-text">Qualidade de cinema em cada download</h2>
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-7">
+                    {[
+                      { img: heroVideos, title: "Qualidade 4K/8K", desc: "Resolução máxima, sem compressão e sem perda de detalhes." },
+                      { img: heroDownload, title: "Download Instantâneo", desc: "Processamento acelerado, arquivo pronto em segundos." },
+                      { img: heroAudio, title: "Áudio em 320 kbps", desc: "Extraia MP3 com fidelidade de estúdio em um clique." },
+                    ].map((card, i) => (
+                      <motion.article
+                        key={card.title}
+                        initial={{ opacity: 0, y: 28 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.65, delay: i * 0.1 }}
+                        className="card-premium rounded-3xl overflow-hidden group"
+                      >
+                        <div className="relative h-56 overflow-hidden">
+                          <img
+                            src={card.img}
+                            alt={card.title}
+                            loading="lazy"
+                            width={1408}
+                            height={896}
+                            className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-premium duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/25 to-transparent" />
+                          <div className="cinematic-veil" />
+                        </div>
+                        <div className="p-7 pt-5">
+                          <h3 className="text-xl font-bold text-foreground mb-2.5">{card.title}</h3>
+                          <p className="text-base text-muted-foreground leading-relaxed">{card.desc}</p>
+                        </div>
+                      </motion.article>
+                    ))}
+                  </div>
                 </div>
               </section>
 
               <FeaturesGrid />
 
               {/* Supported formats */}
-              <section className="py-12 px-4">
-                <div className="max-w-3xl mx-auto text-center">
-                  <img src={ytIcon} alt="Logotipo da plataforma YouTube" className="w-20 h-20 mx-auto mb-4 drop-shadow-2xl" />
-                  <h2 className="text-2xl font-bold text-foreground mb-2">Todos os formatos suportados</h2>
-                  <p className="text-muted-foreground text-sm mb-6">MP4, WebM, MP3, M4A — Vídeos, Shorts, Playlists e Canais</p>
-                  <div className="flex flex-wrap justify-center gap-3">
-                    {["MP4", "WebM", "MP3", "M4A", "4K", "1080p", "720p", "Shorts", "Playlist"].map((tag) => (
-                      <span key={tag} className="px-4 py-2 rounded-xl glass-card text-sm font-medium text-foreground">
+              <section className="relative py-20 px-4 overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[360px] rounded-full bg-primary/10 blur-[140px]" />
+                </div>
+                <div className="relative max-w-4xl mx-auto text-center">
+                  <div className="relative w-28 h-28 mx-auto mb-7 rounded-3xl overflow-hidden shadow-elevated ring-1 ring-border/50">
+                    <img src={ytIcon} alt="Player de vídeo premium" loading="lazy" width={1408} height={896} className="w-full h-full object-cover" />
+                  </div>
+                  <span className="eyebrow text-primary">Compatibilidade</span>
+                  <h2 className="mt-4 text-3xl md:text-4xl font-extrabold gradient-text mb-4">Todos os formatos suportados</h2>
+                  <p className="text-lg text-muted-foreground mb-9">MP4, WebM, MP3, M4A — Vídeos, Shorts, Playlists e Canais</p>
+                  <div className="flex flex-wrap justify-center gap-3.5">
+                    {["MP4", "WebM", "MP3", "M4A", "8K", "4K", "1080p", "720p", "Shorts", "Playlist"].map((tag) => (
+                      <span key={tag} className="glass-card px-6 py-3 rounded-2xl text-base font-semibold text-foreground">
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
               </section>
+
             </>
           )}
 
           {/* FAQ Preview */}
           {!videoResult && (
-            <section className="py-12 px-4">
+            <section className="relative py-20 px-4">
               <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-foreground mb-2">Perguntas Frequentes</h2>
-                  <p className="text-muted-foreground text-sm">Dúvidas mais comuns sobre download de vídeos do YouTube</p>
+                <div className="text-center mb-11">
+                  <span className="eyebrow text-primary">Dúvidas</span>
+                  <h2 className="mt-4 text-3xl md:text-4xl font-extrabold gradient-text mb-3">Perguntas Frequentes</h2>
+                  <p className="text-lg text-muted-foreground">Dúvidas mais comuns sobre download de vídeos do YouTube</p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3.5">
                   {homeFaq.map((item, i) => (
-                    <div key={i} className="glass-card rounded-xl overflow-hidden">
+                    <div key={i} className="card-premium rounded-2xl overflow-hidden">
                       <button
                         onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                        className="w-full flex items-center justify-between px-5 py-4 text-left transition-premium hover:bg-secondary/50"
+                        aria-expanded={openFaq === i}
+                        className="w-full flex items-center justify-between px-7 py-6 text-left transition-premium hover:bg-secondary/40"
                       >
-                        <span className="text-sm font-medium text-foreground pr-4">{item.question}</span>
-                        {openFaq === i ? <ChevronUp className="w-4 h-4 text-primary flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground flex-shrink-0" />}
+                        <span className="text-lg font-semibold text-foreground pr-4">{item.question}</span>
+                        {openFaq === i ? <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />}
                       </button>
                       {openFaq === i && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-5 pb-4">
-                          <p className="text-sm text-muted-foreground leading-relaxed">{item.answer}</p>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-7 pb-6">
+                          <div className="hairline mb-5" />
+                          <p className="text-base text-muted-foreground leading-relaxed">{item.answer}</p>
                         </motion.div>
                       )}
                     </div>
                   ))}
                 </div>
-                <div className="text-center mt-6">
+                <div className="text-center mt-10">
                   <button
                     onClick={() => navigate("/faq")}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl gradient-red text-primary-foreground font-medium text-sm shadow-button hover:shadow-button-hover transition-premium"
+                    className="inline-flex items-center gap-2.5 px-9 py-4 rounded-2xl gradient-red text-primary-foreground font-bold text-base shadow-button hover:shadow-button-hover transition-premium"
                   >
                     Ver todas as perguntas
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </button>
                 </div>
               </div>
             </section>
           )}
+
 
           <AppFooter />
         </main>
