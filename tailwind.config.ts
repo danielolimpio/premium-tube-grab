@@ -27,7 +27,7 @@ export default {
         "3xl": ["2.125rem", { lineHeight: "1.22" }],
         "4xl": ["2.625rem", { lineHeight: "1.14" }],
         "5xl": ["3.375rem", { lineHeight: "1.08" }],
-        "6xl": ["4.25rem", { lineHeight": "1.04" }],
+        "6xl": ["4.25rem", { lineHeight: "1.04" }],
       },
 
       colors: {
