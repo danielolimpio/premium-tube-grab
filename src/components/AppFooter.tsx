@@ -42,14 +42,14 @@ export default function AppFooter() {
       </div>
 
       <div className="relative max-w-6xl mx-auto px-5 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-5">
             <Link to="/" className="flex items-center gap-4">
               <img src={logo} alt="Baixar Vídeo YouTube" className="w-14 h-14 rounded-2xl shadow-button" />
               <div>
-                <h3 className="text-lg font-extrabold text-foreground tracking-tight">Baixar Vídeo</h3>
-                <p className="text-sm text-muted-foreground">Download 4K/8K Grátis</p>
+                <h3 className="text-lg font-extrabold text-foreground tracking-tight whitespace-nowrap">Baixar Vídeo</h3>
+                <p className="text-sm text-muted-foreground whitespace-nowrap">Download 4K/8K Grátis</p>
               </div>
             </Link>
             <p className="text-base text-muted-foreground leading-relaxed">

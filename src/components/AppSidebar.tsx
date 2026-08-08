@@ -37,7 +37,7 @@ export default function AppSidebar() {
 
   return (
     <motion.aside
-      animate={{ width: collapsed ? 84 : 296 }}
+      animate={{ width: collapsed ? 84 : 320 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="hidden lg:flex flex-col h-screen sticky top-0 bg-sidebar-background border-r border-border/50 overflow-hidden z-50"
     >
@@ -55,8 +55,8 @@ export default function AppSidebar() {
         </div>
         {!collapsed && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden cursor-pointer" onClick={() => navigate("/")}>
-            <span className="block text-xl font-extrabold text-foreground tracking-tight whitespace-nowrap">Baixar Vídeo</span>
-            <p className="text-sm text-muted-foreground whitespace-nowrap">YouTube Download 4K/8K</p>
+            <span className="block text-lg font-extrabold text-foreground tracking-tight whitespace-nowrap">Baixar Vídeo</span>
+            <p className="text-xs text-muted-foreground whitespace-nowrap">YouTube Download 4K/8K</p>
           </motion.div>
         )}
         <button
