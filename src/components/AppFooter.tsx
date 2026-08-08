@@ -81,7 +81,7 @@ export default function AppFooter() {
               {legalLinks.map((link) => (
                 <li key={link.path}>
                   <Link to={link.path} className="text-base text-muted-foreground hover:text-primary transition-premium flex items-center gap-2.5">
-                    <link.icon className="w-4.5 h-4.5 w-[18px] h-[18px]" />
+                    <link.icon className="w-[18px] h-[18px]" />
                     {link.label}
                   </Link>
                 </li>
