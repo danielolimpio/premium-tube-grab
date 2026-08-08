@@ -14,8 +14,22 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Roboto", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["Outfit", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Sora", "Outfit", "sans-serif"],
       },
+      fontSize: {
+        xs: ["0.8125rem", { lineHeight: "1.5" }],
+        sm: ["0.9375rem", { lineHeight: "1.65" }],
+        base: ["1.0625rem", { lineHeight: "1.75" }],
+        lg: ["1.1875rem", { lineHeight: "1.7" }],
+        xl: ["1.375rem", { lineHeight: "1.5" }],
+        "2xl": ["1.75rem", { lineHeight: "1.3" }],
+        "3xl": ["2.125rem", { lineHeight: "1.22" }],
+        "4xl": ["2.625rem", { lineHeight: "1.14" }],
+        "5xl": ["3.375rem", { lineHeight: "1.08" }],
+        "6xl": ["4.25rem", { lineHeight": "1.04" }],
+      },
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
