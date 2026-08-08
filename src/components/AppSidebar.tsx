@@ -37,36 +37,42 @@ export default function AppSidebar() {
 
   return (
     <motion.aside
-      animate={{ width: collapsed ? 72 : 280 }}
-      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      animate={{ width: collapsed ? 84 : 296 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       className="hidden lg:flex flex-col h-screen sticky top-0 bg-sidebar-background border-r border-border/50 overflow-hidden z-50"
     >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 -left-16 w-[280px] h-[280px] rounded-full bg-primary/10 blur-[110px]" />
+      </div>
+
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 py-5 border-b border-border/30">
+      <div className="relative flex items-center gap-3.5 px-5 py-6">
         <div
-          className="relative flex-shrink-0 w-10 h-10 rounded-xl overflow-hidden cursor-pointer shadow-button"
+          className="relative flex-shrink-0 w-12 h-12 rounded-2xl overflow-hidden cursor-pointer shadow-button"
           onClick={() => navigate("/")}
         >
           <img src={logo} alt="Baixar Vídeo YouTube" className="w-full h-full object-cover" />
         </div>
         {!collapsed && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden cursor-pointer" onClick={() => navigate("/")}>
-            <span className="block text-lg font-bold text-foreground tracking-tight whitespace-nowrap">Baixar Vídeo</span>
-            <p className="text-xs text-muted-foreground whitespace-nowrap">YouTube Download 4K/8K</p>
+            <span className="block text-xl font-extrabold text-foreground tracking-tight whitespace-nowrap">Baixar Vídeo</span>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">YouTube Download 4K/8K</p>
           </motion.div>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
           aria-label={collapsed ? "Expandir menu lateral" : "Recolher menu lateral"}
           aria-expanded={!collapsed}
-          className="ml-auto flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-premium"
+          className="ml-auto flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-premium border border-border/40"
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
       </div>
 
+      <div className="hairline mx-5" />
+
       {/* Unified scroll area (discrete, no visible scrollbar) */}
-      <nav className="flex-1 py-3 px-3 space-y-1 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <nav className="relative flex-1 py-4 px-3.5 space-y-1.5 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -74,18 +80,18 @@ export default function AppSidebar() {
               key={item.label}
               whileHover={{ x: collapsed ? 0 : 4 }}
               onClick={() => navigate(item.path)}
-              className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-premium group relative ${
+              className={`w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-premium group relative ${
                 isActive
                   ? "gradient-red text-primary-foreground shadow-button"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/80 border border-transparent hover:border-border/50"
               }`}
             >
-              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <item.icon className="w-[22px] h-[22px] flex-shrink-0" strokeWidth={isActive ? 2.2 : 1.9} />
               {!collapsed && (
-                <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
+                <span className="text-base font-semibold whitespace-nowrap">{item.label}</span>
               )}
               {!collapsed && item.badge && (
-                <span className="ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full gradient-red text-primary-foreground">
+                <span className="ml-auto px-2.5 py-1 text-[11px] font-bold rounded-full gradient-red text-primary-foreground">
                   {item.badge}
                 </span>
               )}
@@ -94,9 +100,9 @@ export default function AppSidebar() {
         })}
 
         {/* Partner downloaders */}
-        <div className="pt-4 mt-4 border-t border-border/30 space-y-1">
+        <div className="pt-5 mt-5 border-t border-border/30 space-y-1.5">
           {!collapsed && (
-            <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="px-4 pb-2.5 eyebrow text-muted-foreground">
               Outros Baixadores
             </p>
           )}
@@ -107,18 +113,18 @@ export default function AppSidebar() {
                 key={item.label}
                 onClick={() => navigate(item.path)}
                 whileHover={{ x: collapsed ? 0 : 4 }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-premium group ${
+                className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl transition-premium group ${
                   isActive
-                    ? "bg-secondary text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                    ? "bg-secondary text-foreground border border-border/60"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/80 border border-transparent hover:border-border/50"
                 }`}
                 title={item.label}
               >
-                <span className={`flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br ${item.gradient} shadow-sm flex-shrink-0`}>
+                <span className={`flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br ${item.gradient} shadow-premium flex-shrink-0`}>
                   <item.icon className="w-4 h-4 text-white" strokeWidth={2.2} />
                 </span>
                 {!collapsed && (
-                  <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
+                  <span className="text-base font-semibold whitespace-nowrap">{item.label}</span>
                 )}
               </motion.button>
             );
@@ -127,14 +133,14 @@ export default function AppSidebar() {
 
         {/* Bate Papo promo */}
         {!collapsed && (
-          <div className="pt-4 mt-4 border-t border-border/30">
+          <div className="pt-5 mt-5 border-t border-border/30">
             <motion.a
               href="https://batepapogratis.com/"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group flex flex-col items-center px-2 py-2 rounded-xl transition-premium"
+              className="group flex flex-col items-center px-2 py-2 rounded-2xl transition-premium"
             >
               <img
                 src={batepapoLogo}
@@ -152,18 +158,18 @@ export default function AppSidebar() {
 
         {/* 100% Grátis */}
         {!collapsed && (
-          <div className="pt-4 mt-4 border-t border-border/30 space-y-3">
-            <div className="glass-card rounded-xl p-3">
-              <div className="flex items-center gap-2 mb-2">
-                <Download className="w-4 h-4 text-green-500" />
-                <span className="text-xs font-semibold text-foreground">100% Grátis</span>
+          <div className="pt-5 mt-5 border-t border-border/30 space-y-3.5">
+            <div className="card-premium rounded-2xl p-4">
+              <div className="flex items-center gap-2.5 mb-3">
+                <Download className="w-5 h-5 text-yt-green" />
+                <span className="text-base font-bold text-foreground">100% Grátis</span>
               </div>
-              <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
-                <div className="h-full bg-green-500 rounded-full" style={{ width: "100%" }} />
+              <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
+                <div className="h-full rounded-full bg-yt-green" style={{ width: "100%" }} />
               </div>
-              <p className="text-[11px] text-muted-foreground mt-1.5">Download Ilimitado</p>
+              <p className="text-sm text-muted-foreground mt-2.5">Download Ilimitado</p>
             </div>
-            <p className="text-[10px] text-muted-foreground text-center">v2.0.1 Grátis</p>
+            <p className="text-xs text-muted-foreground text-center">v2.0.1 Grátis</p>
           </div>
         )}
       </nav>
