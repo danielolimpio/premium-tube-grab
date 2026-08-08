@@ -43,26 +43,27 @@ export default function AppHeader({ onMenuToggle }: { onMenuToggle?: () => void 
         <button
           onClick={() => navigate("/faq")}
           aria-label="Abrir perguntas frequentes"
-          className="p-2 rounded-lg hover:bg-secondary transition-premium text-muted-foreground hover:text-foreground"
+          className="p-2.5 rounded-xl hover:bg-secondary transition-premium text-muted-foreground hover:text-foreground border border-transparent hover:border-border/50"
           title="FAQ"
         >
-          <HelpCircle className="w-5 h-5" />
+          <HelpCircle className="w-[22px] h-[22px]" />
         </button>
         <button
           aria-label="Selecionar idioma"
-          className="p-2 rounded-lg hover:bg-secondary transition-premium text-muted-foreground hover:text-foreground"
+          className="p-2.5 rounded-xl hover:bg-secondary transition-premium text-muted-foreground hover:text-foreground border border-transparent hover:border-border/50"
         >
-          <Globe className="w-5 h-5" />
+          <Globe className="w-[22px] h-[22px]" />
         </button>
         <button
           onClick={toggleTheme}
           aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
-          className="p-2 rounded-lg hover:bg-secondary transition-premium text-muted-foreground hover:text-foreground"
+          className="p-2.5 rounded-xl hover:bg-secondary transition-premium text-muted-foreground hover:text-foreground border border-transparent hover:border-border/50"
           title={theme === "dark" ? "Modo Claro" : "Modo Escuro"}
         >
-          {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          {theme === "dark" ? <Sun className="w-[22px] h-[22px]" /> : <Moon className="w-[22px] h-[22px]" />}
         </button>
       </div>
+
     </header>
   );
 }
