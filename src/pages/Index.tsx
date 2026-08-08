@@ -10,9 +10,11 @@ import FeaturesGrid from "@/components/FeaturesGrid";
 import VideoResults from "@/components/VideoResults";
 import SEOHead from "@/components/SEOHead";
 import { type VideoResult } from "@/lib/youtube";
-import heroVideos from "@/assets/hero-videos.jpg";
-import heroDownload from "@/assets/hero-download.jpg";
-import ytIcon from "@/assets/yt-icon.png";
+import heroVideos from "@/assets/premium-quality.jpg";
+import heroDownload from "@/assets/premium-download.jpg";
+import heroAudio from "@/assets/premium-audio.jpg";
+import ytIcon from "@/assets/premium-hero-play.jpg";
+
 
 const homeFaq = [
   { question: "Como baixar vídeos do YouTube grátis?", answer: "Basta copiar o link do vídeo do YouTube, colar na barra de pesquisa do nosso site e clicar em 'Baixar Vídeo'. Em segundos, você verá as opções de qualidade disponíveis para download. Todo o processo é 100% gratuito e sem necessidade de cadastro." },
