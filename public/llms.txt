@@ -11,6 +11,11 @@
 - [Playlists](/playlist): Baixar playlists inteiras do YouTube.
 - [Canais](/canais): Baixar vídeos de canais do YouTube.
 - [Downloads](/downloads): Histórico local de downloads recentes (armazenado no navegador).
+- [Baixar Vídeos do Instagram](/baixar-videos-instagram): Reels, Stories e IGTV em alta qualidade.
+- [Baixar Vídeos do TikTok](/baixar-videos-tiktok): TikToks sem marca d'água.
+- [Baixar Vídeos do Facebook](/baixar-videos-facebook): Vídeos e Reels do Facebook em HD.
+- [Baixar Vídeos do Twitter (X)](/baixar-videos-twitter): Vídeos e GIFs do Twitter em HD.
+- [Baixar Vídeos do Kwai](/baixar-videos-kwai): Vídeos do Kwai sem marca d'água.
 - [FAQ](/faq): Perguntas frequentes sobre downloads, formatos e qualidade.
 - [Sobre](/sobre): Sobre o projeto e missão.
 - [Contato](/contato): Fale conosco.

@@ -50,6 +50,7 @@ const ROUTES = [
   },
   {
     path: "/downloads",
+    noindex: true,
     title: "Histórico de Downloads - Baixar Vídeo YouTube",
     description:
       "Acesse seu histórico de downloads de vídeos, Shorts e áudios do YouTube. Reproduza rapidamente arquivos baixados anteriormente.",
@@ -142,36 +143,94 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;");
 }
 
+function breadcrumbLd(route, url) {
+  const items = [
+    { name: "Início", item: `${SITE_URL}/` },
+  ];
+  if (route.path !== "/") {
+    items.push({ name: route.title.split(" - ")[0].split(" | ")[0], item: url });
+  }
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: it.item,
+    })),
+  };
+}
+
+function buildJsonLd(route, url) {
+  const graph = [
+    {
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: route.title,
+      description: route.description,
+      inLanguage: "pt-BR",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+    },
+    breadcrumbLd(route, url),
+  ];
+  if (route.path === "/") {
+    graph.push({
+      "@type": "WebApplication",
+      name: "Baixar Vídeo YouTube",
+      url: `${SITE_URL}/`,
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript. Requires HTML5.",
+      inLanguage: "pt-BR",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
+      description: route.description,
+    });
+  }
+  return `<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": graph,
+  }).replace(/</g, "\\u003c")}</script>`;
+}
+
 function buildHead(route) {
-  const url = `${SITE_URL}${route.path === "/" ? "" : route.path}`;
+  const url = `${SITE_URL}${route.path === "/" ? "/" : route.path}`;
   const t = escapeHtml(route.title);
   const d = escapeHtml(route.description);
   const u = escapeHtml(url);
   const img = escapeHtml(OG_IMAGE);
-  return {
-    title: `<title>${t}</title>`,
-    tags: [
-      `<meta name="description" content="${d}" />`,
-      `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
-      `<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
-      `<link rel="canonical" href="${u}" />`,
+  const robots = route.noindex
+    ? "noindex, follow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+  const tags = [
+    `<meta name="description" content="${d}" />`,
+    `<meta name="robots" content="${robots}" />`,
+    `<meta name="googlebot" content="${robots}" />`,
+    `<link rel="canonical" href="${u}" />`,
+  ];
+  if (!route.noindex) {
+    tags.push(
       `<link rel="alternate" hreflang="pt-BR" href="${u}" />`,
       `<link rel="alternate" hreflang="x-default" href="${u}" />`,
-      `<meta property="og:title" content="${t}" />`,
-      `<meta property="og:description" content="${d}" />`,
-      `<meta property="og:url" content="${u}" />`,
-      `<meta property="og:type" content="website" />`,
-      `<meta property="og:site_name" content="Baixar Vídeo YouTube" />`,
-      `<meta property="og:locale" content="pt_BR" />`,
-      `<meta property="og:image" content="${img}" />`,
-      `<meta property="og:image:width" content="1200" />`,
-      `<meta property="og:image:height" content="630" />`,
-      `<meta name="twitter:card" content="summary_large_image" />`,
-      `<meta name="twitter:title" content="${t}" />`,
-      `<meta name="twitter:description" content="${d}" />`,
-      `<meta name="twitter:image" content="${img}" />`,
-    ].join("\n    "),
-  };
+    );
+  }
+  tags.push(
+    `<meta property="og:title" content="${t}" />`,
+    `<meta property="og:description" content="${d}" />`,
+    `<meta property="og:url" content="${u}" />`,
+    `<meta property="og:type" content="website" />`,
+    `<meta property="og:site_name" content="Baixar Vídeo YouTube" />`,
+    `<meta property="og:locale" content="pt_BR" />`,
+    `<meta property="og:image" content="${img}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${t}" />`,
+    `<meta name="twitter:description" content="${d}" />`,
+    `<meta name="twitter:image" content="${img}" />`,
+    buildJsonLd(route, url),
+  );
+  return { title: `<title>${t}</title>`, tags: tags.join("\n    ") };
 }
 
 function prerenderRoute(templateHtml, route) {
@@ -180,14 +239,13 @@ function prerenderRoute(templateHtml, route) {
   // 1) Replace <title>
   let html = templateHtml.replace(/<title>[\s\S]*?<\/title>/i, title);
 
-  // 2) Replace or insert canonical
-  if (/<link\s+rel=["']canonical["'][^>]*>/i.test(html)) {
-    html = html.replace(/<link\s+rel=["']canonical["'][^>]*>\s*/i, "");
-  }
+  // 2) Strip existing canonical + hreflang (re-injected per route)
+  html = html.replace(/\s*<link\s+rel=["']canonical["'][^>]*>\s*/gi, "\n    ");
+  html = html.replace(/\s*<link\s+rel=["']alternate["'][^>]*hreflang=[^>]*>\s*/gi, "\n    ");
 
-  // 3) Strip existing description / og:* / twitter:* to avoid duplicates
+  // 3) Strip existing description / robots / og:* / twitter:* to avoid duplicates
   html = html.replace(
-    /\s*<meta\s+(?:name|property)=["'](?:description|og:[^"']+|twitter:[^"']+)["'][^>]*>\s*/gi,
+    /\s*<meta\s+(?:name|property)=["'](?:description|robots|googlebot|keywords|og:[^"']+|twitter:[^"']+)["'][^>]*>\s*/gi,
     "\n    ",
   );
 
@@ -196,6 +254,7 @@ function prerenderRoute(templateHtml, route) {
 
   return html;
 }
+
 
 function main() {
   const distIndex = resolve("dist/index.html");
