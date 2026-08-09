@@ -50,6 +50,7 @@ const ROUTES = [
   },
   {
     path: "/downloads",
+    noindex: true,
     title: "Histórico de Downloads - Baixar Vídeo YouTube",
     description:
       "Acesse seu histórico de downloads de vídeos, Shorts e áudios do YouTube. Reproduza rapidamente arquivos baixados anteriormente.",
