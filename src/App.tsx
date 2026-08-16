@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ScrollToTop from "@/components/ScrollToTop";
+import { HtmlLangSync } from "@/i18n";
 import Index from "./pages/Index.tsx";
 import Videos from "./pages/Videos.tsx";
 import Shorts from "./pages/Shorts.tsx";
@@ -29,6 +30,39 @@ import BaixarVideosKwai from "./pages/partners/BaixarVideosKwai.tsx";
 
 const queryClient = new QueryClient();
 
+/** Rotas base (sem prefixo de idioma) */
+const appRoutes: { path: string; element: JSX.Element }[] = [
+  { path: "/", element: <Index /> },
+  { path: "/videos", element: <Videos /> },
+  { path: "/shorts", element: <Shorts /> },
+  { path: "/audio", element: <Audio /> },
+  { path: "/playlist", element: <Playlist /> },
+  { path: "/canais", element: <Canais /> },
+  { path: "/downloads", element: <Downloads /> },
+  { path: "/uso-responsavel", element: <UsoResponsavel /> },
+  { path: "/privacidade", element: <Privacidade /> },
+  { path: "/termos", element: <Termos /> },
+  { path: "/cookies", element: <Cookies /> },
+  { path: "/dmca", element: <DMCA /> },
+  { path: "/contato", element: <Contato /> },
+  { path: "/sobre", element: <Sobre /> },
+  { path: "/faq", element: <FAQ /> },
+  { path: "/baixar-videos-instagram", element: <BaixarVideosInstagram /> },
+  { path: "/baixar-videos-tiktok", element: <BaixarVideosTiktok /> },
+  { path: "/baixar-videos-facebook", element: <BaixarVideosFacebook /> },
+  { path: "/baixar-videos-twitter", element: <BaixarVideosTwitter /> },
+  { path: "/baixar-videos-kwai", element: <BaixarVideosKwai /> },
+];
+
+const renderRoutes = (prefix = "") =>
+  appRoutes.map(({ path, element }) => (
+    <Route
+      key={`${prefix}${path}`}
+      path={prefix && path === "/" ? prefix : `${prefix}${path}`}
+      element={element}
+    />
+  ));
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
@@ -37,27 +71,11 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <HtmlLangSync />
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/videos" element={<Videos />} />
-            <Route path="/shorts" element={<Shorts />} />
-            <Route path="/audio" element={<Audio />} />
-            <Route path="/playlist" element={<Playlist />} />
-            <Route path="/canais" element={<Canais />} />
-            <Route path="/downloads" element={<Downloads />} />
-            <Route path="/uso-responsavel" element={<UsoResponsavel />} />
-            <Route path="/privacidade" element={<Privacidade />} />
-            <Route path="/termos" element={<Termos />} />
-            <Route path="/cookies" element={<Cookies />} />
-            <Route path="/dmca" element={<DMCA />} />
-            <Route path="/contato" element={<Contato />} />
-            <Route path="/sobre" element={<Sobre />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/baixar-videos-instagram" element={<BaixarVideosInstagram />} />
-            <Route path="/baixar-videos-tiktok" element={<BaixarVideosTiktok />} />
-            <Route path="/baixar-videos-facebook" element={<BaixarVideosFacebook />} />
-            <Route path="/baixar-videos-twitter" element={<BaixarVideosTwitter />} />
-            <Route path="/baixar-videos-kwai" element={<BaixarVideosKwai />} />
+            {renderRoutes()}
+            {renderRoutes("/en")}
+            {renderRoutes("/es")}
             {/* Legacy URL redirects (fix Google Search Console 404s) */}
             <Route path="/Principal" element={<Navigate to="/" replace />} />
             <Route path="/principal" element={<Navigate to="/" replace />} />
