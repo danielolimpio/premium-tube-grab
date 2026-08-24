@@ -10,7 +10,7 @@ import FeaturesGrid from "@/components/FeaturesGrid";
 import VideoResults from "@/components/VideoResults";
 import SEOHead from "@/components/SEOHead";
 import { type VideoResult } from "@/lib/youtube";
-import moneyArticle from "@/assets/ganhar-dinheiro-youtube.jpg.asset.json";
+import moneyArticle from "@/assets/ganhar-dinheiro-youtube.jpg";
 import ytIcon from "@/assets/premium-hero-play.jpg";
 
 
@@ -77,7 +77,7 @@ const Index = () => {
                   >
                     <div className="relative">
                       <img
-                        src={moneyArticle.url}
+                        src={moneyArticle}
                         alt="Conheça todas as maneiras de ganhar dinheiro no YouTube"
                         loading="lazy"
                         width={1664}
