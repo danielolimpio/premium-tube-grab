@@ -14,7 +14,7 @@ import AppSidebar from "@/components/AppSidebar";
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
 import SEOHead from "@/components/SEOHead";
-import heroArticle from "@/assets/ganhar-dinheiro-youtube.jpg.asset.json";
+import heroArticle from "@/assets/ganhar-dinheiro-youtube.jpg";
 
 const SITE = "https://baixarvideoyoutube.com";
 const PATH = "/como-ganhar-dinheiro-no-youtube";
@@ -606,7 +606,7 @@ export default function GanharDinheiroYoutube() {
 
             <figure className="mt-8 rounded-3xl overflow-hidden shadow-elevated ring-1 ring-border/50">
               <img
-                src={heroArticle.url}
+                src={heroArticle}
                 alt="Guia completo sobre todas as maneiras de ganhar dinheiro com YouTube"
                 width={1664}
                 height={936}
