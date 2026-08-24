@@ -21,6 +21,7 @@ import DMCA from "./pages/DMCA.tsx";
 import Contato from "./pages/Contato.tsx";
 import Sobre from "./pages/Sobre.tsx";
 import FAQ from "./pages/FAQ.tsx";
+import GanharDinheiroYoutube from "./pages/GanharDinheiroYoutube.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import BaixarVideosInstagram from "./pages/partners/BaixarVideosInstagram.tsx";
 import BaixarVideosTiktok from "./pages/partners/BaixarVideosTiktok.tsx";
@@ -47,6 +48,7 @@ const appRoutes: { path: string; element: JSX.Element }[] = [
   { path: "/contato", element: <Contato /> },
   { path: "/sobre", element: <Sobre /> },
   { path: "/faq", element: <FAQ /> },
+  { path: "/como-ganhar-dinheiro-no-youtube", element: <GanharDinheiroYoutube /> },
   { path: "/baixar-videos-instagram", element: <BaixarVideosInstagram /> },
   { path: "/baixar-videos-tiktok", element: <BaixarVideosTiktok /> },
   { path: "/baixar-videos-facebook", element: <BaixarVideosFacebook /> },

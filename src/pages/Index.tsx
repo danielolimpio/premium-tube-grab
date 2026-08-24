@@ -10,10 +10,9 @@ import FeaturesGrid from "@/components/FeaturesGrid";
 import VideoResults from "@/components/VideoResults";
 import SEOHead from "@/components/SEOHead";
 import { type VideoResult } from "@/lib/youtube";
-import heroVideos from "@/assets/premium-quality.jpg";
-import heroDownload from "@/assets/premium-download.jpg";
-import heroAudio from "@/assets/premium-audio.jpg";
+import moneyArticle from "@/assets/ganhar-dinheiro-youtube.jpg.asset.json";
 import ytIcon from "@/assets/premium-hero-play.jpg";
+
 
 
 const homeFaq = [
@@ -61,49 +60,46 @@ const Index = () => {
 
           {!videoResult && (
             <>
-              {/* Cinematic showcase */}
+              {/* Artigo destaque */}
               <section className="relative py-20 px-4 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none bg-cinematic opacity-70" />
-                <div className="relative max-w-6xl mx-auto">
+                <div className="relative max-w-5xl mx-auto">
                   <div className="text-center mb-12">
-                    <span className="eyebrow text-primary">Experiência Premium</span>
-                    <h2 className="mt-4 text-3xl md:text-4xl font-extrabold gradient-text">Qualidade de cinema em cada download</h2>
+                    <span className="eyebrow text-primary">Conteúdo Premium</span>
+                    <h2 className="mt-4 text-3xl md:text-4xl font-extrabold gradient-text">Como Ganhar Dinheiro com Youtube em 2026</h2>
                   </div>
-                  <div className="grid md:grid-cols-3 gap-7">
-                    {[
-                      { img: heroVideos, title: "Qualidade 4K/8K", desc: "Resolução máxima, sem compressão e sem perda de detalhes." },
-                      { img: heroDownload, title: "Download Instantâneo", desc: "Processamento acelerado, arquivo pronto em segundos." },
-                      { img: heroAudio, title: "Áudio em 320 kbps", desc: "Extraia MP3 com fidelidade de estúdio em um clique." },
-                    ].map((card, i) => (
-                      <motion.article
-                        key={card.title}
-                        initial={{ opacity: 0, y: 28 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.65, delay: i * 0.1 }}
-                        className="card-premium rounded-3xl overflow-hidden group"
-                      >
-                        <div className="relative h-56 overflow-hidden">
-                          <img
-                            src={card.img}
-                            alt={card.title}
-                            loading="lazy"
-                            width={1408}
-                            height={896}
-                            className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-premium duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/25 to-transparent" />
-                          <div className="cinematic-veil" />
-                        </div>
-                        <div className="p-7 pt-5">
-                          <h3 className="text-xl font-bold text-foreground mb-2.5">{card.title}</h3>
-                          <p className="text-base text-muted-foreground leading-relaxed">{card.desc}</p>
-                        </div>
-                      </motion.article>
-                    ))}
-                  </div>
+                  <motion.article
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.65 }}
+                    className="card-premium rounded-3xl overflow-hidden group relative"
+                  >
+                    <div className="relative">
+                      <img
+                        src={moneyArticle.url}
+                        alt="Conheça todas as maneiras de ganhar dinheiro no YouTube"
+                        loading="lazy"
+                        width={1664}
+                        height={936}
+                        className="w-full h-auto object-cover scale-[1.02] group-hover:scale-105 transition-premium duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                      <div className="cinematic-veil" />
+                      <div className="absolute inset-x-0 bottom-0 p-7 flex justify-center">
+                        <button
+                          onClick={() => navigate("/como-ganhar-dinheiro-no-youtube")}
+                          className="inline-flex items-center gap-2.5 px-9 py-4 rounded-2xl gradient-red text-primary-foreground font-bold text-base shadow-button hover:shadow-button-hover transition-premium"
+                        >
+                          Saber Mais
+                          <ArrowRight className="w-5 h-5" />
+                        </button>
+                      </div>
+                    </div>
+                  </motion.article>
                 </div>
               </section>
+
 
               <FeaturesGrid />
 

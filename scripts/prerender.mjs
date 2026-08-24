@@ -62,6 +62,13 @@ const ROUTES = [
       "Tire suas dúvidas sobre como baixar vídeos do YouTube em 4K, 8K, MP3, MP4, playlists, Shorts e mais. Guia completo e atualizado.",
   },
   {
+    path: "/como-ganhar-dinheiro-no-youtube",
+    title: "Como Ganhar Dinheiro no YouTube em 2026: Todas as Formas",
+    description:
+      "Guia completo de como ganhar dinheiro no YouTube em 2026: anúncios, Shorts, Premium, Clubes, Supers, Shopping, afiliados, patrocínios, produtos, cursos e serviços.",
+  },
+
+  {
     path: "/sobre",
     title: "Sobre Nós - Baixar Vídeo YouTube",
     description:
