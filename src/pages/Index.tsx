@@ -10,10 +10,9 @@ import FeaturesGrid from "@/components/FeaturesGrid";
 import VideoResults from "@/components/VideoResults";
 import SEOHead from "@/components/SEOHead";
 import { type VideoResult } from "@/lib/youtube";
-import heroVideos from "@/assets/premium-quality.jpg";
-import heroDownload from "@/assets/premium-download.jpg";
-import heroAudio from "@/assets/premium-audio.jpg";
+import moneyArticle from "@/assets/ganhar-dinheiro-youtube.jpg.asset.json";
 import ytIcon from "@/assets/premium-hero-play.jpg";
+
 
 
 const homeFaq = [
